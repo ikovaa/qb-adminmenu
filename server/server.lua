@@ -152,6 +152,13 @@ RegisterNetEvent('qb-admin:server:inventory', function(player)
     TriggerClientEvent('qb-admin:client:inventory', src, player.id)
 end)
 
+RegisterNetEvent('qb-admin:server:clearInv', function(player)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(player.id)
+    Player.Functions.ClearInventory()
+    TriggerClientEvent('QBCore:Notify', src, Lang:t("info.inventory_cleared"), "success")
+end)
+
 RegisterNetEvent('qb-admin:server:cloth', function(player)
     TriggerClientEvent('qb-clothing:client:openMenu', player.id)
 end)
@@ -221,9 +228,14 @@ end)
 
 -- Commands
 
-QBCore.Commands.Add('maxmods', Lang:t("desc.max_mod_desc"), {}, false, function(source)
+QBCore.Commands.Add('maxmods', Lang:t("commands.max_mods"), {}, false, function(source)
     local src = source
     TriggerClientEvent('qb-admin:client:maxmodVehicle', src)
+end, 'admin')
+
+QBCore.Commands.Add('fuel', Lang:t("commands.fuel"), {}, false, function(source)
+    local src = source
+    TriggerClientEvent('qb-admin:client:fuelVehicle', src)
 end, 'admin')
 
 QBCore.Commands.Add('blips', Lang:t("commands.blips_for_player"), {}, false, function(source)
@@ -429,22 +441,22 @@ QBCore.Commands.Add('setammo', Lang:t("commands.ammo_amount_set"), {{name='amoun
     end
 end, 'admin')
 
-QBCore.Commands.Add('vector2', 'Copy vector2 to clipboard (Admin only)', {}, false, function(source)
+QBCore.Commands.Add('vector2', Lang:t("commands.copy_vector2"), {}, false, function(source)
     local src = source
     TriggerClientEvent('qb-admin:client:copyToClipboard', src, 'coords2')
 end, 'admin')
 
-QBCore.Commands.Add('vector3', 'Copy vector3 to clipboard (Admin only)', {}, false, function(source)
+QBCore.Commands.Add('vector3', Lang:t("commands.copy_vector3"), {}, false, function(source)
     local src = source
     TriggerClientEvent('qb-admin:client:copyToClipboard', src, 'coords3')
 end, 'admin')
 
-QBCore.Commands.Add('vector4', 'Copy vector4 to clipboard (Admin only)', {}, false, function(source)
+QBCore.Commands.Add('vector4', Lang:t("commands.copy_vector4"), {}, false, function(source)
     local src = source
     TriggerClientEvent('qb-admin:client:copyToClipboard', src, 'coords4')
 end, 'admin')
 
-QBCore.Commands.Add('heading', 'Copy heading to clipboard (Admin only)', {}, false, function(source)
+QBCore.Commands.Add('heading', Lang:t("commands.copy_heading"), {}, false, function(source)
     local src = source
     TriggerClientEvent('qb-admin:client:copyToClipboard', src, 'heading')
 end, 'admin')

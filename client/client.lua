@@ -261,6 +261,13 @@ local menu5_vehicles_fix = menu5:AddButton({
     description = Lang:t("desc.fix_vehicle_desc")
 })
 
+local menu5_vehicles_fuel = menu5:AddButton({
+    icon = '⛽',
+    label = Lang:t("menu.fuel_vehicle"),
+    value = 'fuel',
+    description = Lang:t("desc.fuel_vehicle_desc")
+})
+
 local menu5_vehicles_buy = menu5:AddButton({
     icon = '💲',
     label = Lang:t("menu.buy"),
@@ -654,7 +661,7 @@ local function OpenPlayerMenus(player)
             icon = '➡️',
             label = Lang:t("info.goto"),
             value = "goto",
-            description = Lang:t("info.goto") .. " " .. player.cid .. Lang:t("info.position")
+            description = Lang:t("info.goto") .. " " .. player.cid .. " " .. Lang:t("info.position")
         },
         [6] = {
             icon = '⬅️',
@@ -672,27 +679,33 @@ local function OpenPlayerMenus(player)
             icon = '🎒',
             label = Lang:t("menu.open_inv"),
             value = "inventory",
-            description = Lang:t("info.open") .. " " .. player.cid .. Lang:t("info.inventories")
+            description = Lang:t("info.open") .. " " .. player.cid .. " " .. Lang:t("info.inventories")
         },
         [9] = {
+            icon = '🎒',
+            label = Lang:t("menu.clear_inv"),
+            value = "clearInv",
+            description = Lang:t("info.clear") .. " " .. player.cid .. " " .. Lang:t("info.inventories")
+        },
+        [10] = {
             icon = '👕',
             label = Lang:t("menu.give_clothing_menu"),
             value = "cloth",
             description = Lang:t("desc.clothing_menu_desc") .. " " .. player.cid
         },
-        [10] = {
+        [11] = {
             icon = '🥾',
             label = Lang:t("menu.kick"),
             value = "kick",
             description = Lang:t("menu.kick") .. " " .. player.cid .. " " .. Lang:t("info.reason")
         },
-        [11] = {
+        [12] = {
             icon = '🚫',
             label = Lang:t("menu.ban"),
             value = "ban",
             description = Lang:t("menu.ban") .. " " .. player.cid .. " " .. Lang:t("info.reason")
         },
-        [12] = {
+        [13] = {
             icon = '🎟️',
             label = Lang:t("menu.permissions"),
             value = "perms",
@@ -901,6 +914,10 @@ end)
 
 menu5_vehicles_fix:On('Select', function(_)
     TriggerServerEvent('QBCore:CallCommand', "fix", {})
+end)
+
+menu5_vehicles_fuel:On('Select', function(_)
+    TriggerServerEvent('QBCore:CallCommand', "fuel", {})
 end)
 
 menu5_vehicles_buy:On('Select', function(_)

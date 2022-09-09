@@ -171,3 +171,8 @@ RegisterNetEvent('qb-admin:client:maxmodVehicle', function()
     PerformanceUpgradeVehicle(vehicle)
 end)
 
+RegisterNetEvent('qb-admin:client:fuelVehicle', function()
+    local vehicle = GetVehiclePedIsIn(PlayerPedId())
+    QBCore.Functions.Notify(Lang:t("info.fuel_vehicle"), 'primary')
+    exports['LegacyFuel']:SetFuel(vehicle, 100.0)
+end)
